@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\00.Framework\HW19.Framwork\HW19.Framwork.csproj" />
+  </ItemGroup>
+
 </Project>

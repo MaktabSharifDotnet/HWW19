@@ -6,4 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\02.Services\HW19.Services\HW19.Services.csproj" />
+    <ProjectReference Include="..\..\03.infrastructure\HW19.Infrastructure.EfCore\HW19.Infrastructure.EfCore.csproj" />
+  </ItemGroup>
+
 </Project>
