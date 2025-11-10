@@ -1,6 +1,21 @@
 ﻿@using HW19.Domain.ToDoAgg.Dtos
 @model List<ToDoInfoDto>
 
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
 <h1>لیست کارها</h1>
 
 <div>
@@ -21,10 +36,17 @@
                  <td>@toDoInfoDto.Description</td>
                  <td>@toDoInfoDto.DueDate</td>
                  <td>@toDoInfoDto.Status</td>
+                 <td>
+                    <form method="post" asp-action="Delete" asp-route-categoryId=@toDoInfoDto.Id onsubmit="return confirm('آیا از حذف این کار مطمئن هستید؟');">
+                        
+                        <button type="submit"  >حذف</button>
+                     </form>
+                   
+                 </td>
               </tr>
             }
             <a asp-controller="User" asp-action="Add" >افزودن کار </a>
-            <a asp-controller="User" asp-action="Delete" >حذف کار </a>
+           
             
      </table>
 

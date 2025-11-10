@@ -10,5 +10,7 @@ namespace HW19.Domain.ToDoAgg.Contracts.Services
     public interface ITodoService
     {
         public List<ToDoInfoDto> GetAll();
+        public int Delete(int categoryId);
+
     }
 }

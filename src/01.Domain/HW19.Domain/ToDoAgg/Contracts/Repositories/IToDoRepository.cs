@@ -10,5 +10,8 @@ namespace HW19.Domain.ToDoAgg.Contracts.Repositories
     public interface IToDoRepository
     {
         public List<ToDoInfoDto> GetAll();
+        public int Delete(int categoryId);
+
+        public bool ExistCaetgoryId(int categoryId);
     }
 }

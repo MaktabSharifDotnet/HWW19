@@ -1,5 +1,6 @@
 ﻿using HW19.Domain.ToDoAgg.Contracts.Repositories;
 using HW19.Domain.ToDoAgg.Dtos;
+using HW19.Domain.ToDoAgg.Entities;
 using HW19.Infrastructure.EfCore.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,6 +18,12 @@ namespace HW19.Infrastructure.EfCore.Repositories.ToDoAgg
         {
             _context = context;
         }
+
+        public bool ExistCaetgoryId(int categoryId)
+        {
+           return _context.ToDos.Any(t=>t.CategoryId == categoryId);
+        }
+
         public List<ToDoInfoDto> GetAll()
         {
           return _context.ToDos
@@ -29,6 +36,17 @@ namespace HW19.Infrastructure.EfCore.Repositories.ToDoAgg
                       DueDate = t.DueDate,
                       Status = t.Status,
                   }).ToList();
+        }
+
+        public int Delete(int categoryId)
+        {
+            ToDo? todo=_context.ToDos.FirstOrDefault(t => t.CategoryId == categoryId);
+            if (todo != null) 
+            {
+                todo.IsDeleted= true;
+               return _context.SaveChanges();
+            }
+            return 0;
         }
     }
 }

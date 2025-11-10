@@ -1,4 +1,5 @@
-﻿using HW19.Domain.ToDoAgg.Dtos;
+﻿using HW19.Domain.ToDoAgg.Contracts.Services;
+using HW19.Domain.ToDoAgg.Dtos;
 using HW19.Domain.ToDoAgg.Entities;
 using HW19.Domain.UserAgg.Contracts.Services;
 using HW19.Domain.UserAgg.Dto;
@@ -9,10 +10,12 @@ namespace HW19.Presentation.MVC.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+        private readonly ITodoService _todoService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService , ITodoService todoService)
         {
             _userService = userService;
+            _todoService = todoService;
         }
 
         public IActionResult Login()
@@ -43,15 +46,27 @@ namespace HW19.Presentation.MVC.Controllers
             }
            
         }
-
-
         public IActionResult Add() 
         {
             return View();
         }
-        public IActionResult Delete() 
+
+        [HttpPost]
+        public IActionResult Delete(int categoryId) 
         {
-            return View();
+            try
+            {
+                    _todoService.Delete(categoryId);
+                    TempData["SuccessMessage"] = "عملیات با موفقیت انجام شد.";
+
+            }
+            catch (Exception ex) 
+            {
+                TempData["ErrorMessage"] = ex.Message;
+
+            }
+
+            return RedirectToAction("Index", "ToDo");
         }
        
     }

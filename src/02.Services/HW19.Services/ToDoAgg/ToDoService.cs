@@ -16,6 +16,17 @@ namespace HW19.Services.ToDoAgg
         {
             _toDoRepository = toDoRepository;
         }
+
+        public int Delete(int categoryId)
+        {
+            bool exist=_toDoRepository.ExistCaetgoryId(categoryId);
+            if (!exist)
+            {
+                throw new Exception("کتگوری ای با این آیدی موجود نیست .");
+            }
+            return _toDoRepository.Delete(categoryId);
+        }
+
         public List<ToDoInfoDto> GetAll()
         {
            return _toDoRepository.GetAll();
