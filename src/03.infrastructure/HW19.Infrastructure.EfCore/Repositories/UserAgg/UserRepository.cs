@@ -1,4 +1,5 @@
-﻿using HW19.Domain.Contracts.Repositories;
+﻿using HW19.Domain.UserAgg.Contracts.Repositories;
+using HW19.Domain.UserAgg.Dto;
 using HW19.Domain.UserAgg.Entities;
 using HW19.Infrastructure.EfCore.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HW19.Infrastructure.EfCore.Repositories
+namespace HW19.Infrastructure.EfCore.Repositories.UserAgg
 {
     public class UserRepository : IUserRepository
     {
@@ -34,6 +35,24 @@ namespace HW19.Infrastructure.EfCore.Repositories
         {
             
            return _context.Users.AsNoTracking().Any(u=> u.Username == username);
+        }
+
+      
+
+        public UserInfoInputDto? GetInfoInputByUsername(string username)
+        {
+           return _context.Users
+                .Where(user=>user.Username== username)
+                .Select(user=>new UserInfoInputDto 
+                {
+                  Username=user.Username,
+                  Password = user.PasswordHash
+                }).FirstOrDefault();
+        }
+
+        public User? GetByUsername(string username)
+        {
+            return _context.Users.FirstOrDefault(u=>u.Username== username);
         }
     }
 }

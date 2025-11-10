@@ -15,8 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\01.Domain\HW19.Domain\HW19.Domain.csproj" />
     <ProjectReference Include="..\..\02.Services\HW19.Services\HW19.Services.csproj" />
     <ProjectReference Include="..\..\03.infrastructure\HW19.Infrastructure.EfCore\HW19.Infrastructure.EfCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 
 </Project>

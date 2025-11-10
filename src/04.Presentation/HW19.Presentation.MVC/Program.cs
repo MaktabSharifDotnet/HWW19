@@ -1,4 +1,12 @@
+using HW19.Domain.ToDoAgg.Contracts.Repositories;
+using HW19.Domain.ToDoAgg.Contracts.Services;
+using HW19.Domain.UserAgg.Contracts.Repositories;
+using HW19.Domain.UserAgg.Contracts.Services;
 using HW19.Infrastructure.EfCore.Persistence;
+using HW19.Infrastructure.EfCore.Repositories.ToDoAgg;
+using HW19.Infrastructure.EfCore.Repositories.UserAgg;
+using HW19.Services.ToDoAgg;
+using HW19.Services.UserAgg;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -6,6 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IToDoRepository, ToDoRepository>();
+builder.Services.AddScoped<ITodoService, ToDoService>();
 builder.Services.AddDbContext<AppDbContext>(options =>
               options.UseSqlServer("Server=DESKTOP-M2BLLND\\SQLEXPRESS;Database=HWW19;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;"));
 

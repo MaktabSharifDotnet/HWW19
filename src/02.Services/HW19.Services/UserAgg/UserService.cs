@@ -1,5 +1,8 @@
-﻿using HW19.Domain.Contracts.Repositories;
-using HW19.Domain.Contracts.Services;
+﻿using HW19.Domain._common;
+using HW19.Domain.UserAgg.Contracts.Repositories;
+using HW19.Domain.UserAgg.Contracts.Services;
+using HW19.Domain.UserAgg.Dto;
+using HW19.Domain.UserAgg.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HW19.Services
+namespace HW19.Services.UserAgg
 {
     public class UserService : IUserService
     {
@@ -16,6 +19,20 @@ namespace HW19.Services
         {
             _userRepository = userRepository;
         }
+
+        public int Login(UserInfoInputDto userInfoInputDto)
+        {
+            User? user= _userRepository.GetByUsername(userInfoInputDto.Username);
+            string passHash = HashPassword(userInfoInputDto.Password);
+
+            if (user==null||user.PasswordHash!=passHash)
+            {
+                throw new Exception("نام کاربری یا رمز عبور اشتباه است. ");
+            }
+            LocalStorage.Login(user);
+            return user.Id;
+        }
+
         public int Register(string username, string password) 
         {
             bool result=  _userRepository.IsAlreadyExistUsername(username);
@@ -26,6 +43,7 @@ namespace HW19.Services
             string passwordHash = HashPassword(password);
             return _userRepository.Register(username, passwordHash);
         }
+
 
         private string HashPassword(string password)
         {

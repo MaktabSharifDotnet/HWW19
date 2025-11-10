@@ -20,9 +20,14 @@ namespace HW19.Domain.ToDoAgg.Entities
         
         public  StatusEnum Status { get; set; }
         public bool IsDeleted { get; set; }
+
+        #region Navigation property
+
         public User User { get; set; }
         public int UserId { get; set; }
         public Category Category { get; set; }
         public int CategoryId { get; set; }
+        #endregion
+
     }
 }

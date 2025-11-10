@@ -18,7 +18,7 @@ namespace HW19.Infrastructure.EfCore.Configurations
             builder.HasQueryFilter(t => t.IsDeleted==false);
 
             builder.Property(t => t.Description).HasMaxLength(40000);
-            builder.Property(t => t.Title).HasMaxLength(10);
+            builder.Property(t => t.Title).HasMaxLength(100);
         }
     }
 }

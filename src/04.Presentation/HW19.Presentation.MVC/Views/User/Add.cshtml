@@ -1,0 +1,69 @@
+﻿@model HW19.Domain.ToDoAgg.Dtos.CreateToDoDto
+
+@section Styles {
+    
+    <link rel="stylesheet" href="https://unpkg.com/kamadatepicker/dist/kamadatepicker.min.css">
+    <link rel="stylesheet" href="~/css/AddToDo.css" />
+}
+
+<div class="add-todo-container">
+    <h1>افزودن کار جدید</h1>
+
+    <form method="post" asp-controller="ToDo" asp-action="Add">
+
+        <div class="form-group">
+            <label asp-for="Title">عنوان</label>
+            <input type="text" asp-for="Title" class="form-control" placeholder="مثلا: تکمیل تمرین مکتب..." />
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="Description">توضیحات</label>
+            <textarea asp-for="Description" class="form-control" rows="4" placeholder="توضیحات بیشتر..."></textarea>
+        </div>
+
+  
+        <div class="form-group">
+            <label asp-for="DueDate">تاریخ سررسید (شمسی)</label>
+           
+            <input type="text" asp-for="DueDate" id="due-date-picker" class="form-control" placeholder="تاریخ را انتخاب کنید" autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CategoryId">دسته‌بندی</label>
+            <select asp-for="CategoryId" class="form-control">
+                <option value="">یک دسته‌بندی انتخاب کنید...</option>
+                <option value="1">شخصی</option>
+                <option value="2">کاری</option>
+                <option value="3">دانشگاهی</option>
+                <option value="4">سایر</option>
+                <option value="5">خرید</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="submit-button">ثبت کار</button>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+   
+    <script src="https://unpkg.com/kamadatepicker"></script>
+
+  
+    <script type="text/javascript">
+       
+        document.addEventListener("DOMContentLoaded", function() {
+          
+            kamaDatepicker('due-date-picker', {
+                buttonsColor: "var(--primary-color)", 
+                forceFarsi: true, 
+                placeholder: "تاریخ سررسید را انتخاب کنید",
+                twodigit: true, 
+                closeAfterSelect: true, 
+                sync: true 
+            });
+        });
+    </script>
+}
