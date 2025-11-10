@@ -19,9 +19,9 @@ namespace HW19.Infrastructure.EfCore.Repositories.ToDoAgg
             _context = context;
         }
 
-        public bool ExistCaetgoryId(int categoryId)
+        public bool ExistCaetgoryId(int toDoId)
         {
-           return _context.ToDos.Any(t=>t.CategoryId == categoryId);
+           return _context.ToDos.Any(t=>t.Id == toDoId);
         }
 
         public List<ToDoInfoDto> GetAll()
@@ -38,9 +38,9 @@ namespace HW19.Infrastructure.EfCore.Repositories.ToDoAgg
                   }).ToList();
         }
 
-        public int Delete(int categoryId)
+        public int Delete(int Id)
         {
-            ToDo? todo=_context.ToDos.FirstOrDefault(t => t.CategoryId == categoryId);
+            ToDo? todo=_context.ToDos.FirstOrDefault(t => t.Id == Id);
             if (todo != null) 
             {
                 todo.IsDeleted= true;

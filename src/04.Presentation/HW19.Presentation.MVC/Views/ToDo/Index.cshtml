@@ -37,7 +37,7 @@
                  <td>@toDoInfoDto.DueDate</td>
                  <td>@toDoInfoDto.Status</td>
                  <td>
-                    <form method="post" asp-action="Delete" asp-route-categoryId=@toDoInfoDto.Id onsubmit="return confirm('آیا از حذف این کار مطمئن هستید؟');">
+                    <form method="post" asp-controller="User" asp-action="Delete" asp-route-toDoId=@toDoInfoDto.Id onsubmit="return confirm('آیا از حذف این کار مطمئن هستید؟');">
                         
                         <button type="submit"  >حذف</button>
                      </form>

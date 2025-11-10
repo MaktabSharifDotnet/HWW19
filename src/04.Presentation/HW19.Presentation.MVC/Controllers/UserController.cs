@@ -50,13 +50,18 @@ namespace HW19.Presentation.MVC.Controllers
         {
             return View();
         }
+        //[HttpPost]
+        //public IActionResult Add() 
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
-        public IActionResult Delete(int categoryId) 
+        public IActionResult Delete(int toDoId) 
         {
             try
             {
-                    _todoService.Delete(categoryId);
+                    _todoService.Delete(toDoId);
                     TempData["SuccessMessage"] = "عملیات با موفقیت انجام شد.";
 
             }
