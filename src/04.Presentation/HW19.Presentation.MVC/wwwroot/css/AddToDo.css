@@ -1,85 +1,86 @@
-﻿/* این فایل CSS رو در مسیر wwwroot/css/ بساز 
-  (بر اساس آموزش‌های Front_End.docx از Flexbox استفاده شده [cite: 3172-3174])
-*/
-:root {
-    --primary-color: #007bff;
-    --border-color: #ddd;
-    --background-color: #f9f9f9;
-    --text-color: #333;
-    --button-text-color: #fff;
-    --error-color: #dc3545;
+﻿body {
+    font-family: "Vazirmatn", sans-serif;
+    background-color: #f7f9fb;
+    margin: 0;
+    padding: 0;
 }
 
-/* استایل کلی فرم */
 .add-todo-container {
     max-width: 600px;
-    margin: 2rem auto; /* وسط‌چین کردن فرم */
-    padding: 2rem;
-    background-color: var(--background-color);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border: 1px solid var(--border-color);
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
     .add-todo-container h1 {
         text-align: center;
-        color: var(--text-color);
-        margin-bottom: 1.5rem;
-        font-weight: 600;
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 24px;
     }
 
-/* استایل اجزای فرم */
 .form-group {
-    margin-bottom: 1.5rem;
-    display: flex;
-    flex-direction: column; /* لیبل‌ها بالای اینپوت‌ها قرار می‌گیرند */
+    margin-bottom: 20px;
 }
 
-    .form-group label {
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-        color: var(--text-color);
-    }
-
-/* استایل یکسان برای همه اینپوت‌ها و سلکت‌ها */
-.form-control {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    box-sizing: border-box; /* برای اینکه پدینگ روی عرض تاثیر نذاره */
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-    /* افکت فوکوس */
-    .form-control:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
-    }
-
-/* استایل دکمه */
-.submit-button {
-    width: 100%;
-    padding: 0.85rem;
-    font-size: 1.1rem;
+label {
+    display: block;
     font-weight: 600;
-    color: var(--button-text-color);
-    background-color: var(--primary-color);
+    color: #444;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.2s;
+}
+
+    input[type="text"]:focus,
+    textarea:focus,
+    select:focus {
+        border-color: #0066cc;
+        outline: none;
+        box-shadow: 0 0 6px rgba(0, 102, 204, 0.2);
+    }
+
+.submit-button {
+    background-color: #0066cc;
+    color: white;
     border: none;
-    border-radius: 6px;
+    padding: 12px 20px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    font-size: 16px;
+    width: 100%;
+    transition: 0.3s;
 }
 
     .submit-button:hover {
-        background-color: #0056b3;
+        background-color: #004c99;
+        box-shadow: 0 3px 10px rgba(0, 76, 153, 0.3);
     }
 
-/* استایل نمایش خطاهای ولیدیشن (اگر بعداً اضافه کردی) */
-.text-danger {
-    color: var(--error-color);
-    font-size: 0.9rem;
-    margin-top: 0.25rem;
+.alert {
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
 }

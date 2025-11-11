@@ -1,4 +1,5 @@
 ﻿@using HW19.Domain.ToDoAgg.Dtos
+@using HW19.Infrastructure.Extensions
 @model List<ToDoInfoDto>
 
 
@@ -9,7 +10,12 @@
     </div>
 }
 
-
+@if (TempData["FailureMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["FailureMessage"]
+    </div>
+}
 @if (TempData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger">
@@ -34,7 +40,7 @@
                  <td>@toDoInfoDto.Id</td>
                  <td>@toDoInfoDto.Title</td>
                  <td>@toDoInfoDto.Description</td>
-                 <td>@toDoInfoDto.DueDate</td>
+                <td>@toDoInfoDto.DueDate.ToShamsi()</td>
                  <td>@toDoInfoDto.Status</td>
                  <td>
                     <form method="post" asp-controller="User" asp-action="Delete" asp-route-toDoId=@toDoInfoDto.Id onsubmit="return confirm('آیا از حذف این کار مطمئن هستید؟');">

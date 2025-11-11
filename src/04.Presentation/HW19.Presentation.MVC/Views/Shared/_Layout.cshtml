@@ -6,9 +6,13 @@
     <title>@ViewData["Title"] - ToDo</title>
 
    
+    <link href="https://cdn.jsdelivr.net/npm/vazirmatn@33.003.2/fonts/web/Vazirmatn-font-face.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+   
     @await RenderSectionAsync("Styles", required: false)
 </head>
+
 <body>
     <header>
         <nav class="navbar">
@@ -28,10 +32,11 @@
         </main>
     </div>
 
-    <footer>
-        <p>© 2025 - ToDoList</p>
+    <footer class="footer">
+        <p>© 2025 - ToDoList | طراحی توسط مکتب‌کد</p>
     </footer>
 
+   
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

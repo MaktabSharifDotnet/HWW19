@@ -50,20 +50,36 @@ namespace HW19.Presentation.MVC.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public IActionResult Add() 
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        public IActionResult Add(CreateToDoDto model)
+        {
+            int result=_todoService.Create(model);
+            if (result > 0) 
+            {
+                TempData["SuccessMessage"] = "عملیات با موفقیت انجام شد.";
+            }
+            else 
+            {
+                TempData["FailureMessage"] = "عملیات با خطا روبرو شد.";
+            }
+            return RedirectToAction("Index", "ToDo");
+        }
 
         [HttpPost]
-        public IActionResult Delete(int toDoId) 
+        public IActionResult Delete(int toDoId)   
         {
             try
             {
-                    _todoService.Delete(toDoId);
+                int result=_todoService.Delete(toDoId);
+                if (result > 0) 
+                {
                     TempData["SuccessMessage"] = "عملیات با موفقیت انجام شد.";
+                }
 
+                else 
+                {
+                    TempData["FailureMessage"] = "عملیات با خطا روبرو شد.";
+                }
             }
             catch (Exception ex) 
             {

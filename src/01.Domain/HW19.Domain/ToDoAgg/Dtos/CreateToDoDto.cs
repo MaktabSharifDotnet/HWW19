@@ -11,6 +11,6 @@ namespace HW19.Domain.ToDoAgg.Dtos
         public string Title { get; set; }
         public string? Description { get; set; }
         public int CategoryId { get; set; }
-        public DateTime DueDate { get; set; }
+        public string DueDate { get; set; }
     }
 }

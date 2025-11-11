@@ -48,5 +48,12 @@ namespace HW19.Infrastructure.EfCore.Repositories.ToDoAgg
             }
             return 0;
         }
+
+        public int Create(ToDo toDo)
+        {
+            _context.ToDos.Add(toDo);
+           return _context.SaveChanges();
+            
+        }
     }
 }

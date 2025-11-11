@@ -1,15 +1,18 @@
+﻿/* ساختار کلی سایت */
 body {
-    font-family: 'Vazir', sans-serif;
-    background-color: #f5f6fa;
+    font-family: Vazir, sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
     margin: 0;
     padding: 0;
-    direction: rtl;
 }
 
+/* ناوبری بالا */
 .navbar {
-    background-color: #3b82f6;
-    color: white;
-    padding: 10px 0;
+    background-color: #005cbf;
+    color: #fff;
+    padding: 12px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .nav-container {
@@ -21,35 +24,54 @@ body {
 }
 
 .nav-brand {
-    font-weight: bold;
-    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
     text-decoration: none;
-    font-size: 18px;
 }
 
 .nav-links a {
-    color: white;
-    margin-left: 20px;
+    color: #fff;
     text-decoration: none;
-    font-size: 15px;
+    margin-left: 20px;
+    transition: color 0.3s ease;
 }
 
     .nav-links a:hover {
-        text-decoration: underline;
+        color: #ffe082;
     }
 
-
+/* محتوای اصلی */
 .container {
-    padding: 30px;
+    max-width: 900px;
+    margin: 40px auto;
+    background: none;
+    padding: 0 20px;
 }
 
-footer {
-    background-color: #f0f0f0;
+/* فوتر */
+.footer {
     text-align: center;
     padding: 15px 0;
-    font-size: 14px;
+    background-color: #e3eaf2;
     color: #555;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+    font-size: 14px;
+    margin-top: 60px;
+    border-top: 1px solid #ccc;
+}
+
+/* واکنش‌گرایی */
+@media (max-width: 600px) {
+    .nav-container {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        margin-top: 10px;
+    }
+
+        .nav-links a {
+            margin-left: 10px;
+            font-size: 14px;
+        }
 }

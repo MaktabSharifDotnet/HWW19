@@ -12,5 +12,7 @@ namespace HW19.Domain.ToDoAgg.Contracts.Services
         public List<ToDoInfoDto> GetAll();
         public int Delete(int categoryId);
 
+        public int Create(CreateToDoDto toDo);
+
     }
 }
