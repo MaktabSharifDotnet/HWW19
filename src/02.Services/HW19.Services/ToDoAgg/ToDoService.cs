@@ -3,6 +3,7 @@ using HW19.Domain.ToDoAgg.Contracts.Repositories;
 using HW19.Domain.ToDoAgg.Contracts.Services;
 using HW19.Domain.ToDoAgg.Dtos;
 using HW19.Domain.ToDoAgg.Entities;
+using HW19.Domain.ToDoAgg.Enums;
 using HW19.Infrastructure.Extensions;
 using System;
 using System.Collections.Generic;
@@ -51,9 +52,34 @@ namespace HW19.Services.ToDoAgg
             return _toDoRepository.Delete(Id);
         }
 
-        public List<ToDoInfoDto> GetAll()
+        public List<ToDoInfoDto> GetAll(int userId)
         {
-           return _toDoRepository.GetAll();
+           return _toDoRepository.GetAll(userId);
+        }
+
+        public int ToggleStatus(int toDoId, int userId)
+        {
+            var todo = _toDoRepository.GetById(toDoId);
+
+           
+            if (todo == null || todo.UserId != userId)
+            {
+
+                throw new Exception("عملیات تغییر وضعیت انجام نشد.");
+            }
+
+           
+            if (todo.Status == StatusEnum.Done)
+            {
+                todo.Status = StatusEnum.Pending;
+            }
+            else
+            {
+                todo.Status = StatusEnum.Done;
+            }
+
+           return _toDoRepository.Update(todo);
         }
     }
 }
+

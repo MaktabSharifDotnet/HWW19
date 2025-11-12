@@ -33,15 +33,16 @@ namespace HW19.Services.UserAgg
             return user.Id;
         }
 
-        public int Register(string username, string password) 
+        public User? Register(UserInfoInputDto userInfoInputDto) 
         {
-            bool result=  _userRepository.IsAlreadyExistUsername(username);
+            bool result=  _userRepository.IsAlreadyExistUsername(userInfoInputDto.Username);
             if (result) 
             {
                 throw new Exception("این نام کاربری قبلا توسط یک کاربر دیگر استفاده شده است ");
             }
-            string passwordHash = HashPassword(password);
-            return _userRepository.Register(username, passwordHash);
+            string passwordHash = HashPassword(userInfoInputDto.Password);
+            userInfoInputDto.Password=passwordHash;
+            return _userRepository.Register(userInfoInputDto);
         }
 
 

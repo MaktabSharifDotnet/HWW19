@@ -1,4 +1,5 @@
-﻿using HW19.Domain.ToDoAgg.Enums;
+﻿using HW19.Domain.CategoryAgg.Entities;
+using HW19.Domain.ToDoAgg.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace HW19.Domain.ToDoAgg.Dtos
         public int Id { get; set; }
 
         public string Title { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public DateTime DueDate { get; set; }
 
         public StatusEnum Status { get; set; }
+
+        public string CategoryName { get; set; }
     }
 }

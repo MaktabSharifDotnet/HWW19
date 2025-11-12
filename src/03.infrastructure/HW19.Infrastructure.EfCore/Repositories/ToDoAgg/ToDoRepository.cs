@@ -24,17 +24,19 @@ namespace HW19.Infrastructure.EfCore.Repositories.ToDoAgg
            return _context.ToDos.Any(t=>t.Id == toDoId);
         }
 
-        public List<ToDoInfoDto> GetAll()
+        public List<ToDoInfoDto> GetAll(int userId)
         {
-          return _context.ToDos
-                .AsNoTracking()
-                .Select(t=>new ToDoInfoDto
+            return _context.ToDos
+                  .AsNoTracking()
+                  .Where(t=>t.UserId == userId)
+                  .Select(t => new ToDoInfoDto
                   {
                       Id = t.Id,
                       Title = t.Title,
                       Description = t.Description,
                       DueDate = t.DueDate,
                       Status = t.Status,
+                      CategoryName = t.Category.Name
                   }).ToList();
         }
 
@@ -54,6 +56,17 @@ namespace HW19.Infrastructure.EfCore.Repositories.ToDoAgg
             _context.ToDos.Add(toDo);
            return _context.SaveChanges();
             
+        }
+
+        public int Update(ToDo toDoId)
+        {
+            _context.ToDos.Update(toDoId);
+            return _context.SaveChanges();
+        }
+
+        public ToDo? GetById(int id)
+        {
+          return _context.ToDos.FirstOrDefault(t=>t.Id==id);
         }
     }
 }

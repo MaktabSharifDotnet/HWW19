@@ -10,7 +10,7 @@ namespace HW19.Domain.UserAgg.Contracts.Repositories
 {
     public interface IUserRepository
     {
-        public int Register(string username, string hashedPassword);
+        public User? Register(UserInfoInputDto userInfoInputDto);
         public bool IsAlreadyExistUsername(string username);
 
         public UserInfoInputDto? GetInfoInputByUsername(string username);

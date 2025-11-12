@@ -1,28 +1,38 @@
 ﻿body {
-    font-family: "Vazirmatn", sans-serif;
+    font-family: "Vazir", "Vazirmatn", sans-serif;
     background-color: #f7f9fb;
     margin: 0;
     padding: 0;
+    color: #333;
+    line-height: 1.6;
 }
 
+/* کانتینر افزودن کار */
 .add-todo-container {
-    max-width: 600px;
+    max-width: 700px;
     margin: 40px auto;
     background: #fff;
     padding: 30px;
     border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
 }
+
+    .add-todo-container:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
 
     .add-todo-container h1 {
         text-align: center;
-        color: #333;
+        color: #2c3e50;
         margin-bottom: 30px;
-        font-size: 24px;
+        font-size: 26px;
+        font-weight: 700;
     }
 
+/* گروه‌های فرم */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 label {
@@ -30,6 +40,7 @@ label {
     font-weight: 600;
     color: #444;
     margin-bottom: 8px;
+    font-size: 15px;
 }
 
 input[type="text"],
@@ -40,17 +51,20 @@ select {
     border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 15px;
-    transition: all 0.2s;
+    transition: all 0.25s ease;
+    background-color: #fafafa;
 }
 
     input[type="text"]:focus,
     textarea:focus,
     select:focus {
         border-color: #0066cc;
+        background-color: #fff;
         outline: none;
-        box-shadow: 0 0 6px rgba(0, 102, 204, 0.2);
+        box-shadow: 0 0 8px rgba(0, 102, 204, 0.25);
     }
 
+/* دکمه اصلی */
 .submit-button {
     background-color: #0066cc;
     color: white;
@@ -60,27 +74,203 @@ select {
     cursor: pointer;
     font-size: 16px;
     width: 100%;
-    transition: 0.3s;
+    transition: all 0.3s;
+    font-weight: 600;
 }
 
     .submit-button:hover {
         background-color: #004c99;
-        box-shadow: 0 3px 10px rgba(0, 76, 153, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 76, 153, 0.3);
     }
 
+/* پیام‌های موفقیت / خطا */
 .alert {
-    padding: 12px;
+    padding: 14px;
     border-radius: 10px;
     margin-bottom: 20px;
     text-align: center;
+    font-size: 15px;
+    font-weight: 500;
 }
 
 .alert-success {
-    background-color: #d4edda;
-    color: #155724;
+    background-color: #e9f8ee;
+    color: #1e7e34;
+    border: 1px solid #b6e2c8;
 }
 
 .alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: #fdecea;
+    color: #c0392b;
+    border: 1px solid #f5b7b1;
 }
+
+/* ===== جدول لیست کارها ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    font-size: 15px;
+}
+
+th {
+    background-color: #0066cc;
+    color: #fff;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #eef5ff;
+    transition: background-color 0.2s;
+}
+
+/* ===== وضعیت‌ها ===== */
+.status-done {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: #007bff;
+    font-weight: 600;
+}
+
+.status-overdue {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* ===== فرم وضعیت ===== */
+.todo-status-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.todo-status-display {
+    display: flex;
+    align-items: center;
+}
+
+.todo-status-checkbox {
+    cursor: pointer;
+    transform: scale(1.2);
+    accent-color: #007bff; /* برای مرورگرهای مدرن */
+    margin-top: 0;
+}
+
+.todo-status-label {
+    margin-right: 8px;
+    margin-bottom: 0;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* ===== دکمه تغییر وضعیت ===== */
+.btn-toggle {
+    padding: 4px 10px;
+    font-size: 13px;
+    border: 1px solid #007bff;
+    background-color: #fff;
+    color: #007bff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .btn-toggle:hover {
+        background-color: #007bff;
+        color: #fff;
+        box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+    }
+
+/* ===== لینک افزودن کار ===== */
+a[asp-action="Add"] {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 16px;
+    background-color: #0066cc;
+    color: #fff !important;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+    a[asp-action="Add"]:hover {
+        background-color: #004c99;
+        box-shadow: 0 3px 10px rgba(0, 76, 153, 0.3);
+    }
+
+/* ===== انیمیشن ظریف برای المان‌ها ===== */
+.alert,
+.add-todo-container,
+table {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.add-task-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 25px;
+    padding: 12px 22px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: #fff !important;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 91, 187, 0.25);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+    .add-task-button::before {
+        content: "➕";
+        font-size: 17px;
+        transition: transform 0.3s ease;
+    }
+
+    .add-task-button:hover {
+        background: linear-gradient(135deg, #0056b3, #003d80);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 91, 187, 0.35);
+    }
+
+        .add-task-button:hover::before {
+            transform: rotate(180deg);
+        }
+
+    .add-task-button:active {
+        transform: scale(0.98);
+        box-shadow: 0 3px 8px rgba(0, 91, 187, 0.2);
+    }

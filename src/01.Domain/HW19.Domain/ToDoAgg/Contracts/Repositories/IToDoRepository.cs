@@ -10,10 +10,12 @@ namespace HW19.Domain.ToDoAgg.Contracts.Repositories
 {
     public interface IToDoRepository
     {
-        public List<ToDoInfoDto> GetAll();
+        public List<ToDoInfoDto> GetAll(int userId);
         public int Delete(int categoryId);
 
         public bool ExistCaetgoryId(int categoryId);
         public int Create(ToDo toDo);
+        public int Update(ToDo toDoId);
+        public ToDo? GetById(int id);
     }
 }

@@ -1,4 +1,5 @@
-﻿using HW19.Domain.ToDoAgg.Contracts.Services;
+﻿using HW19.Domain._common;
+using HW19.Domain.ToDoAgg.Contracts.Services;
 using HW19.Domain.ToDoAgg.Dtos;
 using HW19.Domain.UserAgg.Contracts.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +15,14 @@ namespace HW19.Presentation.MVC.Controllers
         }
         public IActionResult Index()
         {
+            if (LocalStorage.LoginUser!=null)
+            {
 
-            List<ToDoInfoDto> toDoInfoDtos= _toDoService.GetAll();
-            return View(toDoInfoDtos);
+                List<ToDoInfoDto> toDoInfoDtos = _toDoService.GetAll(LocalStorage.LoginUser.Id);
+                return View(toDoInfoDtos);
+            }
+
+            return RedirectToAction("Login" , "User");
         }
 
     }

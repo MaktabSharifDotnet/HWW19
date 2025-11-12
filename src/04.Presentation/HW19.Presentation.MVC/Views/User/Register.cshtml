@@ -1,0 +1,15 @@
+﻿@using HW19.Domain.UserAgg.Dto
+@model UserInfoInputDto
+
+
+<h1>فرم ثبت نام کاربر</h1>
+
+<form method="post" asp-action="Register" asp-controller="User">
+
+    <label asp-for="Username">نام کاربری</label>
+    <input asp-for="Username">
+    <label asp-for="Password">رمز عبور</label>
+    <input asp-for="Password">
+    <button type="submit">ذخیره</button>
+
+</form>

@@ -1,4 +1,5 @@
 ﻿@using HW19.Domain.ToDoAgg.Dtos
+@using HW19.Domain.ToDoAgg.Enums
 @using HW19.Infrastructure.Extensions
 @model List<ToDoInfoDto>
 
@@ -22,14 +23,16 @@
         @TempData["ErrorMessage"]
     </div>
 }
+<link rel="stylesheet" href="~/css/addtodo.css" />
 <h1>لیست کارها</h1>
 
 <div>
     <table>
             <tr>
-                <th>ردیف</th>
+                
                 <th>عنوان</th>
                 <th>توضیحات</th>
+                <th>دسته بندی</th>
                 <th>تاریخ سررسید</th>
                 <th> وضعیت</th>
                 <th></th>
@@ -37,11 +40,48 @@
         @foreach (var toDoInfoDto in Model)
             {
                <tr>
-                 <td>@toDoInfoDto.Id</td>
+                 
                  <td>@toDoInfoDto.Title</td>
                  <td>@toDoInfoDto.Description</td>
+                 <td>@toDoInfoDto.CategoryName</td>
                 <td>@toDoInfoDto.DueDate.ToShamsi()</td>
-                 <td>@toDoInfoDto.Status</td>
+                <td>
+                    @{
+                      
+                        var statusText = "در انتظار";
+                        var statusClass = "status-pending"; 
+                        bool isChecked = false; 
+
+                        
+                        if (toDoInfoDto.Status == StatusEnum.Done)
+                        {
+                            statusText = "انجام شده";
+                            statusClass = "status-done";
+                            isChecked = true; 
+                        }
+                       
+                        else if (toDoInfoDto.DueDate < DateTime.Today && toDoInfoDto.Status != StatusEnum.Done)
+                        {
+                            statusText = "عقب افتاده";
+                            statusClass = "status-overdue"; 
+                        }
+                    }
+                    <form method="post" asp-controller="User" asp-action="ToggleStatus" asp-route-toDoId="@toDoInfoDto.Id" class="todo-status-form">
+
+                        <div class="todo-status-display">
+                            <input type="checkbox"
+                                   checked="@isChecked"                
+                                   id="status-@toDoInfoDto.Id"
+                                   class="todo-status-checkbox" />
+
+                            <label for="status-@toDoInfoDto.Id" class="@statusClass todo-status-label">
+                                @statusText
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-toggle">ثبت</button>
+                    </form>
+                </td>
                  <td>
                     <form method="post" asp-controller="User" asp-action="Delete" asp-route-toDoId=@toDoInfoDto.Id onsubmit="return confirm('آیا از حذف این کار مطمئن هستید؟');">
                         
@@ -51,7 +91,7 @@
                  </td>
               </tr>
             }
-            <a asp-controller="User" asp-action="Add" >افزودن کار </a>
+        <a asp-controller="User" asp-action="Add" class="add-task-button">افزودن کار </a>
            
             
      </table>

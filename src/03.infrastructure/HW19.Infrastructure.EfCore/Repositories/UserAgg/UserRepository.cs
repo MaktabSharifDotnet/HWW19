@@ -19,16 +19,16 @@ namespace HW19.Infrastructure.EfCore.Repositories.UserAgg
             _context = context;
         }
 
-        public int Register(string username , string hashedPassword) 
+        public User? Register(UserInfoInputDto userInfoInputDto) 
         {
            User user = new User() 
            {
-             Username = username ,
-             PasswordHash = hashedPassword
+             Username = userInfoInputDto.Username,
+             PasswordHash = userInfoInputDto.Password
            };
             _context.Users.Add(user);
              _context.SaveChanges();
-            return user.Id;
+            return user;
         }
 
         public bool IsAlreadyExistUsername(string username) 
