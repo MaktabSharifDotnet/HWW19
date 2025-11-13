@@ -10,7 +10,7 @@ namespace HW19.Domain.ToDoAgg.Contracts.Services
 {
     public interface ITodoService
     {
-        public List<ToDoInfoDto> GetAll(int userId);
+        public List<ToDoInfoDto> GetAll(int userId, string searchTerm, string sortBy);
         public int Delete(int categoryId);
 
         public int Create(CreateToDoDto toDo);

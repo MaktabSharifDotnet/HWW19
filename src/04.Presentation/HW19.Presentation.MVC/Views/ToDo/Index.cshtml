@@ -1,7 +1,7 @@
 ﻿@using HW19.Domain.ToDoAgg.Dtos
 @using HW19.Domain.ToDoAgg.Enums
 @using HW19.Infrastructure.Extensions
-@model List<ToDoInfoDto>
+@model HW19.Presentation.MVC.Models.ToDoIndexViewModel
 
 
 @if (TempData["SuccessMessage"] != null)
@@ -26,6 +26,30 @@
 <link rel="stylesheet" href="~/css/addtodo.css" />
 <h1>لیست کارها</h1>
 
+
+<form  asp-action="Index" class="filter-form">
+    <div class="filter-controls">
+        <div class="form-group">
+            <label>جستجو:</label>
+            <input asp-for="SearchTerm" class="form-control" />
+        </div>
+        
+        <div class="form-group">
+            <label>مرتب‌سازی بر اساس:</label>
+
+            <select asp-for="SortBy" class="form-control">
+                <option value="">-- انتخاب کنید --</option>
+                <option value="Title">عنوان</option>
+                <option value="DueDate">تاریخ سررسید</option>
+                <option value="IsCompleted">وضعیت</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">اعمال فیلتر</button>
+    </div>
+</form>
+
+
 <div>
     <table>
             <tr>
@@ -37,33 +61,29 @@
                 <th> وضعیت</th>
                 <th></th>
             </tr>
-        @foreach (var toDoInfoDto in Model)
-            {
-               <tr>
-                 
-                 <td>@toDoInfoDto.Title</td>
-                 <td>@toDoInfoDto.Description</td>
-                 <td>@toDoInfoDto.CategoryName</td>
+        @foreach (var toDoInfoDto in Model.ToDos)
+        {
+            <tr>
+                <td>@toDoInfoDto.Title</td>
+                <td>@toDoInfoDto.Description</td>
+                <td>@toDoInfoDto.CategoryName</td>
                 <td>@toDoInfoDto.DueDate.ToShamsi()</td>
                 <td>
                     @{
-                      
                         var statusText = "در انتظار";
-                        var statusClass = "status-pending"; 
-                        bool isChecked = false; 
+                        var statusClass = "status-pending";
+                        bool isChecked = false;
 
-                        
                         if (toDoInfoDto.Status == StatusEnum.Done)
                         {
                             statusText = "انجام شده";
                             statusClass = "status-done";
-                            isChecked = true; 
+                            isChecked = true;
                         }
-                       
                         else if (toDoInfoDto.DueDate < DateTime.Today && toDoInfoDto.Status != StatusEnum.Done)
                         {
                             statusText = "عقب افتاده";
-                            statusClass = "status-overdue"; 
+                            statusClass = "status-overdue";
                         }
                     }
                     <form method="post" asp-controller="User" asp-action="ToggleStatus" asp-route-toDoId="@toDoInfoDto.Id" class="todo-status-form">

@@ -52,9 +52,9 @@ namespace HW19.Services.ToDoAgg
             return _toDoRepository.Delete(Id);
         }
 
-        public List<ToDoInfoDto> GetAll(int userId)
+        public List<ToDoInfoDto> GetAll(int userId, string searchTerm, string sortBy)
         {
-           return _toDoRepository.GetAll(userId);
+            return _toDoRepository.GetAll(userId, searchTerm, sortBy);
         }
 
         public int ToggleStatus(int toDoId, int userId)

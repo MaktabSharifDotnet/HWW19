@@ -24,20 +24,47 @@ namespace HW19.Infrastructure.EfCore.Repositories.ToDoAgg
            return _context.ToDos.Any(t=>t.Id == toDoId);
         }
 
-        public List<ToDoInfoDto> GetAll(int userId)
+        public List<ToDoInfoDto> GetAll(int userId, string searchTerm, string sortBy)
         {
-            return _context.ToDos
-                  .AsNoTracking()
-                  .Where(t=>t.UserId == userId)
-                  .Select(t => new ToDoInfoDto
-                  {
-                      Id = t.Id,
-                      Title = t.Title,
-                      Description = t.Description,
-                      DueDate = t.DueDate,
-                      Status = t.Status,
-                      CategoryName = t.Category.Name
-                  }).ToList();
+            var query = _context.ToDos
+                   .AsNoTracking() 
+                   .Where(t => t.UserId == userId);
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+               
+                query = query.Where(t =>
+                    t.Title.Contains(searchTerm) ||
+                    t.Category.Name.Contains(searchTerm)
+                );
+            }
+            switch (sortBy)
+            {
+                case "Title":
+                    query = query.OrderBy(t => t.Title);
+                    break;
+                case "DueDate":
+                    query = query.OrderBy(t => t.DueDate);
+                    break;
+                case "IsCompleted":
+                    
+                    query = query.OrderBy(t => t.Status);
+                    break;
+                default:
+                   
+                    query = query.OrderByDescending(t => t.Id);
+                    break;
+
+            }
+            return query.Select(t => new ToDoInfoDto
+            {
+                Id = t.Id,
+                Title = t.Title,
+                Description = t.Description,
+                DueDate = t.DueDate,
+                Status = t.Status,
+                CategoryName = t.Category.Name
+            }).ToList();
         }
 
         public int Delete(int Id)
